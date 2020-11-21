@@ -114,6 +114,9 @@ venv.bak/
 .spyderproject
 .spyproject
 
+# WebStorm project settings
+.idea
+
 # Rope project settings
 .ropeproject
 
@@ -127,3 +130,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Local image files uploaded by the user
+/Server/uploaded_images/*
+
+# This is a placeholder file to force git to keep the folder but also ignore the rest of the contents of the folder.
+!Server/uploaded_images/.gitkeep
