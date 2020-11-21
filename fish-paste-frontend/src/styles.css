@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background-image: url('assets/wp2636472-background-spongebob.jpg');
+    font-family: "Comic Sans MS", cursive, sans-serif
+}
+
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #FFFF00;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    padding: 0 20px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
