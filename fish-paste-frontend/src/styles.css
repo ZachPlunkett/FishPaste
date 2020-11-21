@@ -2,7 +2,8 @@
 
 body {
     background-image: url('assets/wp2636472-background-spongebob.jpg');
-    font-family: "Comic Sans MS", cursive, sans-serif
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    padding-top: 65px;
 }
 
 .toolbar {
@@ -23,11 +24,14 @@ body {
     flex: 1;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 8px 0;
+.text-center {
+    text-align: center;
 }
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    background-color: white;
+    background: rgba(0, 0, 0, 0.65);
+  }
