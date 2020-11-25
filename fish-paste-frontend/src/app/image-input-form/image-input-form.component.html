@@ -1,0 +1,11 @@
+<div class="form-group">
+  <input type="file" accept=".png,.jpg,.jpeg" (change)="fileChosen($event)" style="color: #FFFF00;">
+  <div style="margin-top: 10px;">
+    <button role="button" class="button" [disabled]="!imageForUpload" (click)="processImage()">Detect!</button>
+  </div>
+  <h4 style="text-align: left;">Image requirements: </h4>
+  <ul style="color: #FFFF00; text-align: left;">
+    <li>Must have one of these extensions: png, jpg, or jpeg</li>
+    <li>No larger than 1024x1024</li>
+  </ul>
+</div>

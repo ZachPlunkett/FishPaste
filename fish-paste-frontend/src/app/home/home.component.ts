@@ -20,6 +20,7 @@ import { interval } from 'rxjs';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   welcomeCardVisible = false;
+  inputCardVisible = false;
   constructor() { }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => this.welcomeCardVisible = true, 100);
+    setTimeout(() => this.inputCardVisible = true, 250);
   }
 
 }

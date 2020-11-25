@@ -1,0 +1,42 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+  color: #FFFF00;
+}
+
+body {
+  color: #FFFF00;
+}
+
+.button {
+  background-color: #FFFF00;
+  border: none;
+  color: black;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+}
+
+.button:disabled {
+  background-color: #3f3f3fbe;
+}
+
+::-webkit-file-upload-button {
+  background: #FFFF00;
+  color: black;
+  border: none;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  padding: 8px 15px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
