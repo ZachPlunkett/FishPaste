@@ -3,7 +3,6 @@
 from flask import Flask, send_from_directory, request, json, redirect, url_for, abort
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
-import sentry_sdk
 from flask import Flask
 
 import os
@@ -20,6 +19,14 @@ app.config['OUTPUT_PATH'] = 'labeled_images'
 
 CORS(app)
 
+
+# Send main.js or whatever main entry point for the front end framework
+@app.route('/main.js', methods=["GET"])
+def get_main():
+    print("Hello World!")
+     #return contents of main.js
+    return send_from_directory('', 'main.js', mimetype='text/javascript')
+
 # Send index.html
 @app.route('/', methods=["GET"])
 @app.route('/index.html', methods=["GET"])
@@ -27,27 +34,14 @@ def get_index():
     #return contents of index.html
     return send_from_directory('', 'index.html', mimetype='text/html')
 
-# Send main.js or whatever main entry point for the front end framework
-@app.route('/main.js', methods=["GET"])
-def get_main():
-     #return contents of main.js
-    return send_from_directory('', 'main.js', mimetype='text/javascript')
-
-# Send the result from machine learning
-# Endpoint is "result", where the result is the predicted character in the uploaded image.
-@app.route('/result', methods=["GET"])
-def characterResult():
-
-    # call the prediction function in model.py
-    # characterInImage = model.prediction()
-
-    # convert dictionary to JSON string
-    resultString = json.dumps(characterInImage)
-
-    return resultString
+# Send labeled image
+@app.route('/labeled/image', methods=["GET"])
+def get_labeled(image):
+    #return contents of index.html
+    return send_from_directory('', 'labeled_images' + image, mimetype='image')
 
 # Upload image of file type .jpg, .jpeg or .png
-@app.route('/', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def upload_image():
     image = request.files['file']
 
@@ -72,20 +66,15 @@ def upload_image():
         image.save(os.path.join(app.config['OUTPUT_PATH'], filename))
 
         # FOR TESTING return url to image saved (for testing)
-        return url_for(os.path.join(app.config['OUTPUT_PATH'], filename))
+        return filename
+
+         # return url_for(os.path.join(app.config['OUTPUT_PATH'], filename))
+                # return redirect(url_for(os.path.join(app.config['OUTPUT_PATH'], filename)))
+                # return redirect(url_for(get_labeled(filename)))
 
     # LJW: change this to return error error response, since for some reason we didn't reach step 2 in if block
     #return to index.
     abort(400, 'Labeled Image failed to return.')
-
-#Dummy Sentry test
-@app.route('/debug-sentry')
-def trigger_error():
-    division_by_zero = 1 / 0
-
-
-
-
 
 # Run the server
 if __name__ == '__main__':
