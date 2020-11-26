@@ -3,6 +3,8 @@
 from flask import Flask, send_from_directory, request, json, redirect, url_for, abort
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+import sentry_sdk
+from flask import Flask
 
 import os
 
@@ -14,6 +16,7 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['IMAGE_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
 app.config['UPLOAD_PATH'] = 'uploaded_images'
+app.config['OUTPUT_PATH'] = 'labeled_images'
 
 CORS(app)
 
@@ -48,20 +51,37 @@ def characterResult():
 def upload_image():
     image = request.files['file']
 
-    # store file with secure filename, to disallow access to paths such as .bashrc, etc.
+    # Store file with secure filename, to disallow access to paths such as .bashrc, etc.
     filename = secure_filename(image.filename)
     if filename != '':
+
+        # Get file extension
         file_ext = os.path.splitext(filename)[1]
 
-        # file type is not of supported types .jpg, .jpeg or .png
+        # File type is not of supported types .jpg, .jpeg or .png
         if file_ext not in app.config['IMAGE_EXTENSIONS']:
             abort(400, 'This file type is unacceptable. Please upload a .jpg, .jpeg, or .png image file type.')
 
-        #file type accepted, save image to path for stored images.
+        # File type accepted, save image to path for stored images.
         image.save(os.path.join(app.config['UPLOAD_PATH'], filename))
 
+         # LJW: placeholder to run model
+        # labeled_image = model.run(file_path_from_image_dot_save_above), or whatever
+
+        # Saving to output path for testing.
+        image.save(os.path.join(app.config['OUTPUT_PATH'], filename))
+
+        # FOR TESTING return url to image saved (for testing)
+        return url_for(os.path.join(app.config['OUTPUT_PATH'], filename))
+
+    # LJW: change this to return error error response, since for some reason we didn't reach step 2 in if block
     #return to index.
-    return redirect(url_for('get_index'))
+    abort(400, 'Labeled Image failed to return.')
+
+#Dummy Sentry test
+@app.route('/debug-sentry')
+def trigger_error():
+    division_by_zero = 1 / 0
 
 
 

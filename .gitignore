@@ -134,5 +134,14 @@ dmypy.json
 # Local image files uploaded by the user
 /Server/uploaded_images/*
 
-# This is a placeholder file to force git to keep the folder but also ignore the rest of the contents of the folder.
+# Labelled image files
+/Server/labeled_images/*
+
+# server.py which contains sensitive key(s)
+/Server/server.py
+
+# This is a placeholder file to force git to keep the uploaded_images and labeled_images folders
+ # but also ignore the rest of the contents of the folder.
 !Server/uploaded_images/.gitkeep
+!Server/labeled_images/.gitkeep
+
