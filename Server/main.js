@@ -1,59 +1,30 @@
 
-var filename;
 
-function postImage() {
+const handleImageUpload = event => {
+    const files = event.target.files
+    const formData = new FormData()
+    formData.append('file', files[0])
 
-    var url = "http://localhost:8001";   // The URL and the port number must match server-side
-    var endpoint = "/upload";            // Endpoint must match server endpoint
-    var http = new XMLHttpRequest();
-    var payloadObj = document.getElementById('inputFile').files[0];
-    var formData = new FormData();
+    fetch('http://localhost:8001/upload', {
+        method: 'POST',
+        body: formData
+    })
+        .then(function(response) {
+            return response.text().then(function(text) {
+                console.log(text);
+            });
+        })
+        .catch(error => {
+            console.error(error)
+        })
 
-    formData.append("image", payloadObj);
-
-    // prepare POST request
-    http.open("POST", url+endpoint, true);
-    http.setRequestHeader("Content-Type", "multipart/form-data");
-
-    http.onreadystatechange = function() {
-        var DONE = 4;       // 4 means the request is done.
-        var OK = 200;       // 200 means a successful return.
-        if (http.readyState == DONE && http.status == OK && http.responseText) {
-
-            //var replyObj = JSON.parse(replyString);
-            filename = http.response;
-        }
-    };
-
-    http.send(formData);
-
-
-    /*
-    var url = "http://localhost:8001";   // The URL and the port number must match server-side
-    var endpoint = "/upload";            // Endpoint must match server endpoint
-    var http = new XMLHttpRequest();
-    var payloadObj = document.getElementById('inputFile').files[0];
-
-    // prepare POST request
-    http.open("POST", url+endpoint, true);
-    http.setRequestHeader("Content-Type", "multipart/form-data");
-
-    http.onreadystatechange = function() {
-        var DONE = 4;       // 4 means the request is done.
-        var OK = 200;       // 200 means a successful return.
-        if (http.readyState == DONE && http.status == OK && http.responseText) {
-
-            //var replyObj = JSON.parse(replyString);
-            filename = http.response;
-        }
-    };
-    // Send request
-    http.send(payloadObj);
-
-    */
 }
 
-
+window.onload=function(){
+    document.querySelector('#inputFile').addEventListener('change', event => {
+        handleImageUpload(event)
+    })
+}
 
 
 function getLabeledImage() {

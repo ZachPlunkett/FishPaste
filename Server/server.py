@@ -43,11 +43,18 @@ def get_labeled(image):
 # Upload image of file type .jpg, .jpeg or .png
 @app.route('/upload', methods=['POST'])
 def upload_image():
+
+    print("Inside /upload")
     image = request.files['file']
+    print("image initialized")
 
     # Store file with secure filename, to disallow access to paths such as .bashrc, etc.
     filename = secure_filename(image.filename)
+    print("filename stored")
+
+
     if filename != '':
+        print("inside if statement")
 
         # Get file extension
         file_ext = os.path.splitext(filename)[1]
@@ -61,14 +68,16 @@ def upload_image():
 
          # LJW: placeholder to run model
         # labeled_image = model.run(file_path_from_image_dot_save_above), or whatever
+        outFilePath = os.path.join(app.config['OUTPUT_PATH'], filename)
+        image.save(outFilePath)
 
         # Saving to output path for testing.
-        image.save(os.path.join(app.config['OUTPUT_PATH'], filename))
+        image.save(outFilePath)
 
         # FOR TESTING return url to image saved (for testing)
-        return filename
+        # return filename
 
-         # return url_for(os.path.join(app.config['OUTPUT_PATH'], filename))
+        return outFilePath
                 # return redirect(url_for(os.path.join(app.config['OUTPUT_PATH'], filename)))
                 # return redirect(url_for(get_labeled(filename)))
 
