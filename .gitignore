@@ -131,6 +131,16 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Yolov5 files
+/Server/yolov5/
+/yolov5/
+YoloV5Train.ipynb
+/Server/best.pt
+
+# images used for training
+FishPaste/images/
+/images/
+
 # Local image files uploaded by the user
 /Server/uploaded_images/*
 
