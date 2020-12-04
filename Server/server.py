@@ -105,7 +105,11 @@ def upload_image():
         outFilePath = os.path.join(app.config['OUTPUT_PATH'], filename)
         #image.save(outFilePath)
 
-        return outFilePath
+        outDict = {
+            "imagePath": outFilePath
+        }
+
+        return outDict
 
     #Error if we aren't able to return file output path (required by frontend for image display)
     abort(400, 'Labeled Image failed to return.')
