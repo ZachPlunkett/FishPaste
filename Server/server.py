@@ -22,6 +22,11 @@ app.config['OUTPUT_PATH'] = 'labeled_images'
 
 CORS(app)
 
+# Custom static data
+@app.route('/' + app.config['OUTPUT_PATH'] + '/<path:filename>')
+def custom_static(filename):
+    return send_from_directory(app.config['OUTPUT_PATH'], filename)
+
 # Send main.js or whatever main entry point for the front end framework
 @app.route('/main.js', methods=["GET"])
 def get_main():
