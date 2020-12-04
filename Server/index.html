@@ -4,10 +4,12 @@
     <title>File Upload</title>
 </head>
 <body>
+<script src="main.js"></script>
 <h1>File Upload</h1>
-<form method="POST" action="" enctype="multipart/form-data">
-    <p><input type="file" name="file"></p>
-    <p><input type="submit" value="Submit"></p>
-</form>
+
+<input id="inputFile" type="file" />
+
+<button onclick="getLabeledImage()">Get Labeled Image</button>
+<p id="result"></p>
 </body>
 </html>
