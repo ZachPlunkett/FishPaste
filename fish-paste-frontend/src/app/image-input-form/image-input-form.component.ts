@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { environment } from './../../environments/environment';
+import { FlaskBackendService } from './../flask-backend.service';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image-input-form',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./image-input-form.component.css']
 })
 export class ImageInputFormComponent implements OnInit {
-  imageForUpload!: File;
-  constructor() { }
+  imageForUpload: File | null | undefined;
+  resultPath: string | undefined;
+  isLoading = false;
+
+  constructor(private flaskBack: FlaskBackendService) { }
 
   ngOnInit() {
   }
@@ -20,7 +25,25 @@ export class ImageInputFormComponent implements OnInit {
   }
 
   processImage(): void {
-    // todo: create image upload service and send request
+    if (this.imageForUpload) {
+      this.isLoading = true;
+
+      this.flaskBack.uploadImage(this.imageForUpload).subscribe(r => {
+          if (r.imagePath) {
+            this.resultPath = r.imagePath.replace('\\', '/');
+            this.imageForUpload = null;
+          }
+        },
+        () => {},
+        () => this.isLoading = false
+      );
+    }
+  }
+
+  getFullImageUrl(): string {
+    if (this.resultPath) { return environment.backendUrlRoot + this.resultPath; }
+
+    return '';
   }
 
 }

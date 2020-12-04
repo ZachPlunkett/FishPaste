@@ -1,7 +1,17 @@
+<div *ngIf="resultPath">
+  <h1>Result</h1>
+  <img src="{{ getFullImageUrl() }}" style="max-width:100%; max-height:100%;">
+  <h2>Wanna try another?</h2>
+</div>
+<div *ngIf="isLoading">
+  <div class="spinner-border text-warning" role="status">
+    <h1 class="sr-only">Processing Image...</h1>
+  </div>
+</div>
 <div class="form-group">
   <input type="file" accept=".png,.jpg,.jpeg" (change)="fileChosen($event)" style="color: #FFFF00;">
   <div style="margin-top: 10px;">
-    <button role="button" class="button" [disabled]="!imageForUpload" (click)="processImage()">Detect!</button>
+    <button role="button" class="button" [disabled]="!imageForUpload || isLoading" (click)="processImage()">Detect!</button>
   </div>
   <h4 style="text-align: left;">Image requirements: </h4>
   <ul style="color: #FFFF00; text-align: left;">

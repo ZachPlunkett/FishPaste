@@ -1,3 +1,5 @@
+import { FlaskBackendService } from './flask-backend.service';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageInputFormComponent } from './image-input-form/image-input-form.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
       HomeComponent,
       ImageInputFormComponent
@@ -16,9 +18,10 @@ import { ImageInputFormComponent } from './image-input-form/image-input-form.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FlaskBackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
