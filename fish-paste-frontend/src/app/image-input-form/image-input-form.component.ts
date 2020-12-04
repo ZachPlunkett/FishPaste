@@ -33,8 +33,9 @@ export class ImageInputFormComponent implements OnInit {
             this.resultPath = r.imagePath.replace('\\', '/');
             this.imageForUpload = null;
           }
+          this.isLoading = false;
         },
-        () => {},
+        () => this.isLoading = false,
         () => this.isLoading = false
       );
     }
