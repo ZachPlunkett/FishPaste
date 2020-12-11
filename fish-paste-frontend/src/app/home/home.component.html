@@ -1,0 +1,8 @@
+<div class="text-center card" style="max-width: 700px;" [@slideIn]="welcomeCardVisible ? true : false">
+  <h1>Welcome to Fish Paste</h1>
+  <h2>An AI for detecting SpongeBob characters</h2>
+  <h3>To begin, upload an image below and click "Detect!"</h3>
+</div>
+<div class="text-center card" style="max-width: 700px;" [@slideIn]="inputCardVisible ? true : false">
+  <app-image-input-form></app-image-input-form>
+</div>
