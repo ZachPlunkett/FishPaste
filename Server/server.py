@@ -57,25 +57,6 @@ def upload_image():
     filename = secure_filename(image.filename)
 
     if filename != '':
-#
-#         # Remove files currently stored in uploaded_images
-#         for root, dirs, files in os.walk('UPLOAD_PATH'):
-#             var = 1
-#             if len(UPLOAD_PATH) != 0:
-#                 print("Not empty directory")
-#             if len(UPLOAD_PATH) == 0:
-#                 print("Not empty directory")
-# #             for file in files:
-# #                 if not fnmatch.fnmatch(file, secureFilename):
-# #                     os.remove(os.path.join(root, file)
-#
-#         # Remove files currently stored in uploaded_images
-#         for root, dirs, files in os.walk('OUTPUT_PATH'):
-#             var = 1
-# #             for file in files:
-# #                 if not fnmatch.fnmatch(file, secureFilename):
-# #                     os.remove(os.path.join(root, file)
-
 
         # Get file extension
         file_ext = os.path.splitext(filename)[1]

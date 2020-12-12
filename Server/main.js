@@ -1,14 +1,16 @@
 
-
+// Handle image upload event
 const handleImageUpload = event => {
     const files = event.target.files
     const formData = new FormData()
     formData.append('file', files[0])
 
+    // make POST request to server
     fetch('http://localhost:8001/upload', {
         method: 'POST',
         body: formData
     })
+        // Return response from server
         .then(function(response) {
             return response.text().then(function(text) {
                 console.log(text);
@@ -20,6 +22,7 @@ const handleImageUpload = event => {
 
 }
 
+// Query selector to run image upload handling on file selected event
 window.onload=function(){
     document.querySelector('#inputFile').addEventListener('change', event => {
         handleImageUpload(event)
